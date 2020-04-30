@@ -19,8 +19,7 @@ class Player:
     def take_decision(self, time):
             duree_pas_de_temps = 0.5
             # TO DO:
-            # implement your policy here to return the load charged / discharged in the battery
-            # below is a simple example
+            # changer signes
 
             if time == 0:
                 return 0
