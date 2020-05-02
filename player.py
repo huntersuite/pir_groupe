@@ -18,8 +18,10 @@ class Player:
 
     def take_decision(self, time):
             duree_pas_de_temps = 0.5
-            # TO DO:
+            # TO DO: 
             # changer signes
+            
+            # Coucou !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             if time == 0:
                 return 0
