@@ -22,6 +22,7 @@ class Player:
             # changer signes
             
             # Coucou !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            #c'est julie k 
 
             if time == 0:
                 return 0
