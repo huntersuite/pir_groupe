@@ -29,6 +29,7 @@ class Player:
         
         duree_pas_de_temps = 0.5
         duree_pas_de_temps = self.dt
+        chargement_batterie = 0
         
         
         # chargement de la batterie lorsque le soleil brille 
