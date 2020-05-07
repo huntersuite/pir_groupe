@@ -49,18 +49,19 @@ class Player:
         
         
         NRJ = self.battery_stock[39]/8 
-        if ( NRJ > self.max_load*dt ):
+        if ( NRJ > self.max_load* duree_pas_de_temps ):
             cas = 1 
         else : 
             cas = 2
         
         if (cas ==2):
             if (time >= 12) and (time <= 15) :
-                chargement_batterie = - NRJ /dt
+                chargement_batterie = - NRJ /duree_pas_de_temps
             else if ((time >= 40) and (time <= 43)) :
-                chargement_batterie = - NRJ /dt 
+                chargement_batterie = - NRJ /duree_pas_de_temps
             else:
                 chargement_batterie = 0
+       
             
         
         # heures où l'électricité est très chère de 12 à 15 et de 40 à 43 (inclus) 
