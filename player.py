@@ -17,16 +17,6 @@ class Player:
         self.imbalance=[]
 
     def take_decision(self, time):
-        def verif_pmax_batterie (self, chargement): 
-            """ 
-            Prend en argument une batterie et un chargement (ou un déchargement selon le signe)
-            Vérifie que la puissance de chargement ne dépasse pas la puissance maximale de la batterie
-            Renvoie le chargement possible 
-            """
-            if (abs(chargement) > self.max_load):
-                chargement = self.max_load*np.sign(chargement)
-            return chargement
-        
         duree_pas_de_temps = self.dt
         chargement_batterie = 0
         
@@ -61,11 +51,12 @@ class Player:
         elif ((time < 12) or (43 < time )) : #dechargement du reste de la batterie la nuit
             if (cas ==1):
                 chargement_batterie = - NRJ_restante / duree_pas_de_temps / (12 + 5) 
-                # 5 ? 
+                # 5 pas de temps entre 22H et minuit ??? 
         
         
         # On vérifie qu'on ne dépasse pas la puissance max. 
-        chargement_batterie = verif_pmax_batterie (self, chargement_batterie )
+        if (abs(chargement_batterie) > self.max_load):
+                chargement_batterie = self.max_load*np.sign(chargement_batterie)
         return chargement_batterie
 
     def update_battery_stock(self, time,load):
