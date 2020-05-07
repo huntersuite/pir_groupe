@@ -15,6 +15,9 @@ class Player:
         self.max_load = 70
         self.prices = {"internal" : [],"external_purchase" : [],"external_sale" : []}
         self.imbalance=[]
+        
+        # A RAJOUTER DANS init !!!!!!!!!!
+        self.NRJ = 0 
 
     def take_decision(self, time):
         duree_pas_de_temps = self.dt
@@ -26,6 +29,7 @@ class Player:
             NRJ_restante = self.battery_stock[39] - 8 * self.max_load * duree_pas_de_temps #pour decharger la nuit
         else : 
             cas = 2 #batterie pas chargee a fond
+        
         
      
         if time >=20 and time<30: #chargement de la batterie au milieu de la journee
@@ -56,6 +60,7 @@ class Player:
         # On vérifie qu'on ne dépasse pas la puissance max. 
         if (abs(chargement_batterie) > self.max_load):
                 chargement_batterie = self.max_load*np.sign(chargement_batterie)
+        if 
         return chargement_batterie
 
     def update_battery_stock(self, time,load):
