@@ -37,12 +37,21 @@ class Player:
             if (self.battery_stock[time-1] + chargement_batterie * duree_pas_de_temps) > self.capacity:
                 chargement_batterie = (self.capacity - self.battery_stock[time-1]) / duree_pas_de_temps
         
+        #on charge + la batterie entre
+        if time >=20 and time<30:
+            chargement_batterie = (self.sun[time-1] / 2)+1 
+            if (self.battery_stock[time-1] + chargement_batterie * duree_pas_de_temps) > self.capacity:
+                chargement_batterie = (self.capacity - self.battery_stock[time-1]) / duree_pas_de_temps
+        
         # Déchargement de la batterie la nuit 
         elif time == 0:
             chargement_batterie = 0
         # heures où l'électricité est très chère de 12 à 15 et de 40 à 43 (inclus) 
         # cas 1 : la batterie est très remplie : on décharge la batterie de pmax aux heures chères et le reste de la batterie 
         # pendant le reste de la nuit 
+        
+        
+        
         
         # cas 2 : la batterie est moins remplie : on décharge la batterie de self.battery_stock[40]/6 aux heures chères 
         elif time > 0 and time < 18:
