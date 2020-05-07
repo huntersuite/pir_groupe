@@ -15,13 +15,16 @@ class Player:
         self.max_load = 70
         self.prices = {"purchase" : [],"sale" : []}
         self.imbalance={"purchase_cover":[], "sale_cover": []}
-        self.NRJ = 0
+        self.memoire_NRJ = 0
 
     def take_decision(self, time):
         duree_pas_de_temps = self.dt
         chargement_batterie = 0
+        
+        if (time == 40):
+            self.memoire_NRJ = self.battery_stock[39] / 8
 
-        NRJ = self.battery_stock[39] / 8
+        NRJ = self.memoire_NRJ 
         if (NRJ > self.max_load * duree_pas_de_temps):
             cas = 1  # batterie chargee a bloc
             NRJ_restante = self.battery_stock[39] - 8 * self.max_load * duree_pas_de_temps  # pour decharger la nuit
