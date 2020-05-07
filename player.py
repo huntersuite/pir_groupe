@@ -19,7 +19,7 @@ class Player:
     def take_decision(self, time):
         duree_pas_de_temps = self.dt
         chargement_batterie = 0
-        
+       
         NRJ = self.battery_stock[39]/8 
         if ( NRJ > self.max_load* duree_pas_de_temps ): 
             cas = 1 #batterie chargee a bloc
@@ -32,9 +32,6 @@ class Player:
             chargement_batterie = (self.sun[time-1] / 2)+1 #+1 au cas ou sun marche pas
             if (self.battery_stock[time-1] + chargement_batterie * duree_pas_de_temps) > self.capacity: #verification de la capacite
                 chargement_batterie = (self.capacity - self.battery_stock[time-1]) / duree_pas_de_temps
-        
-        elif time == 0: #milieu de la nuit
-            chargement_batterie = 0
 
         elif (time >= 12) and (time <= 15) : #dechargement le matin (heure de pointe)
             if (cas ==2):
@@ -51,7 +48,9 @@ class Player:
         elif ((time < 12) or (43 < time )) : #dechargement du reste de la batterie la nuit
             if (cas ==1):
                 chargement_batterie = - NRJ_restante / duree_pas_de_temps / (12 + 5) 
-                # 5 pas de temps entre 22H et minuit ??? 
+                # 5 correspond au nombre de pas de temps entre 22H et minuit ??? 
+            else :
+                chargement_batterie = 0
         
         
         # On vérifie qu'on ne dépasse pas la puissance max. 
