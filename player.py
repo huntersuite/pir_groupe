@@ -13,57 +13,49 @@ class Player:
         self.battery_stock = np.zeros(49) #a(t)
         self.capacity = 100
         self.max_load = 70
-        self.prices = {"internal" : [],"external_purchase" : [],"external_sale" : []}
-        self.imbalance=[]
-        
-        # A RAJOUTER DANS init !!!!!!!!!!
-        self.NRJ = 0 
+        self.prices = {"purchase" : [],"sale" : []}
+        self.imbalance={"purchase_cover":[], "sale_cover": []}
+        self.NRJ = 0
 
     def take_decision(self, time):
         duree_pas_de_temps = self.dt
         chargement_batterie = 0
-        
-        if (self.time == 40):
-            self.NRJ = self.battery_stock[39]/8 
-       
-        NRJ = self.NRJ 
-        if ( NRJ > self.max_load* duree_pas_de_temps ): 
-            cas = 1 #batterie chargee a bloc
-            NRJ_restante = self.battery_stock[39] - 8 * self.max_load * duree_pas_de_temps #pour decharger la nuit
-        else : 
-            cas = 2 #batterie pas chargee a fond
-        
-        
-     
-        if time >=20 and time<30: #chargement de la batterie au milieu de la journee
-            chargement_batterie = (self.sun[time-1] / 2)+1 #+1 au cas ou sun marche pas
-            if (self.battery_stock[time-1] + chargement_batterie * duree_pas_de_temps) > self.capacity: #verification de la capacite
-                chargement_batterie = (self.capacity - self.battery_stock[time-1]) / duree_pas_de_temps
 
-        elif (time >= 12) and (time <= 15) : #dechargement le matin (heure de pointe)
-            if (cas ==2):
-                chargement_batterie = - NRJ /duree_pas_de_temps
+        NRJ = self.battery_stock[39] / 8
+        if (NRJ > self.max_load * duree_pas_de_temps):
+            cas = 1  # batterie chargee a bloc
+            NRJ_restante = self.battery_stock[39] - 8 * self.max_load * duree_pas_de_temps  # pour decharger la nuit
+        else:
+            cas = 2  # batterie pas chargee a fond
+
+        if time >= 20 and time < 30:  # chargement de la batterie au milieu de la journee
+            chargement_batterie = (self.sun[time - 1] / 2) + 1  # +1 au cas ou sun marche pas
+            if (self.battery_stock[
+                    time - 1] + chargement_batterie * duree_pas_de_temps) > self.capacity:  # verification de la capacite
+                chargement_batterie = (self.capacity - self.battery_stock[time - 1]) / duree_pas_de_temps
+
+        elif (time >= 12) and (time <= 15):  # dechargement le matin (heure de pointe)
+            if (cas == 2):
+                chargement_batterie = - NRJ / duree_pas_de_temps
             else:
                 chargement_batterie = - self.max_load
-                
-        elif ((time >= 40) and (time <= 43)) : #dechargement le soir (heure de pointe)
-            if (cas ==2):
-                chargement_batterie = - NRJ /duree_pas_de_temps
+
+        elif ((time >= 40) and (time <= 43)):  # dechargement le soir (heure de pointe)
+            if (cas == 2):
+                chargement_batterie = - NRJ / duree_pas_de_temps
             else:
                 chargement_batterie = - self.max_load
-        
-        elif ((time < 12) or (43 < time )) : #dechargement du reste de la batterie la nuit
-            if (cas ==1):
-                chargement_batterie = - NRJ_restante / duree_pas_de_temps / (12 + 5) 
-                # 5 correspond au nombre de pas de temps entre 22H et minuit ??? 
-            else :
+
+        elif ((time < 12) or (43 < time)):  # dechargement du reste de la batterie la nuit
+            if (cas == 1):
+                chargement_batterie = - NRJ_restante / duree_pas_de_temps / (12 + 5)
+                # 5 correspond au nombre de pas de temps entre 22H et minuit ???
+            else:
                 chargement_batterie = 0
-        
-        
-        # On vérifie qu'on ne dépasse pas la puissance max. 
+
+        # On vérifie qu'on ne dépasse pas la puissance max.
         if (abs(chargement_batterie) > self.max_load):
-                chargement_batterie = self.max_load*np.sign(chargement_batterie)
-        if 
+            chargement_batterie = self.max_load * np.sign(chargement_batterie)
         return chargement_batterie
 
     def update_battery_stock(self, time,load):
@@ -97,12 +89,11 @@ class Player:
     def observe(self, t, sun, price, imbalance):
         self.sun.append(sun)
         
-        self.prices["internal"].append(price["internal"])
-        self.prices["external_sale"].append(price["external_sale"])
-        self.prices["external_purchase"].append(price["external_purchase"])
-        
-        self.imbalance.append(imbalance)
-        
+        self.prices["purchase"].append(price["purchase"])
+        self.prices["sale"].append(price["sale"])
+
+        self.imbalance["purchase_cover"].append(imbalance["purchase_cover"])
+        self.imbalance["sale_cover"].append(imbalance["sale_cover"])
     
     def reset(self):
         self.load= np.zeros(48)
@@ -113,5 +104,5 @@ class Player:
         self.battery_stock[0] = last_bat
         
         self.sun=[]
-        self.prices = {"internal" : [],"external_purchase" : [],"external_sale" : []}
-        self.imbalance=[]
+        self.prices = {"purchase" : [],"sale" : []}
+        self.imbalance={"purchase_cover":[], "sale_cover": []}
