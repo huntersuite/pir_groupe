@@ -69,8 +69,14 @@ class Player:
         
         elif ((time < 12) or (43 < time )) :
             if (cas ==1):
-                chargement_batterie = NRJ_restante / duree_pas_de_temps / (12 + 5) 
+                chargement_batterie = - NRJ_restante / duree_pas_de_temps / (12 + 5) 
                 # 5 ? 
+        
+        
+        # On vérifie qu'on ne dépasse pas la puissance max. 
+        chargement_batterie = verif_pmax_batterie (self, chargement_batterie )
+        return chargement_batterie
+        
         # heures où l'électricité est très chère de 12 à 15 et de 40 à 43 (inclus) 
         # cas 1 : la batterie est très remplie : on décharge la batterie de pmax aux heures chères et le reste de la batterie 
         # pendant le reste de la nuit 
@@ -81,11 +87,6 @@ class Player:
         #    chargement_batterie = -self.battery_stock[time-1]/2*duree_pas_de_temps
         #elif time > 35 and time < 49:
         #    chargement_batterie = - self.battery_stock[time-1]/2*duree_pas_de_temps
-        
-        # On vérifie qu'on ne dépasse pas la puissance max. 
-        chargement_batterie = verif_pmax_batterie (self, chargement_batterie )
-        return chargement_batterie
-            
 
             #if time == 0:
              #   return 0
