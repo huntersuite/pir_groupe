@@ -59,12 +59,14 @@ class Player:
             if (cas ==2):
                 chargement_batterie = - NRJ /duree_pas_de_temps
             else:
+                chargement_batterie = self.max_load
                 
                 
         elif ((time >= 40) and (time <= 43)) :
             if (cas ==2):
                 chargement_batterie = - NRJ /duree_pas_de_temps
             else:
+                chargement_batterie = self.max_load
         
         # heures où l'électricité est très chère de 12 à 15 et de 40 à 43 (inclus) 
         # cas 1 : la batterie est très remplie : on décharge la batterie de pmax aux heures chères et le reste de la batterie 
