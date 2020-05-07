@@ -33,6 +33,7 @@ class Player:
         NRJ = self.battery_stock[39]/8 
         if ( NRJ > self.max_load* duree_pas_de_temps ):
             cas = 1 
+            NRJ_restante = self.battery_stock[39] - 8 * self.max_load * duree_pas_de_temps
         else : 
             cas = 2
         
