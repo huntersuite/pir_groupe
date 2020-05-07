@@ -27,7 +27,6 @@ class Player:
                 chargement = self.max_load*np.sign(chargement)
             return chargement
         
-        duree_pas_de_temps = 0.5
         duree_pas_de_temps = self.dt
         chargement_batterie = 0
         
@@ -55,6 +54,9 @@ class Player:
         else : 
             cas = 2
         
+        if (cas ==2):
+            
+            
         
         # heures où l'électricité est très chère de 12 à 15 et de 40 à 43 (inclus) 
         # cas 1 : la batterie est très remplie : on décharge la batterie de pmax aux heures chères et le reste de la batterie 
