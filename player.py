@@ -27,7 +27,7 @@ class Player:
         NRJ = self.memoire_NRJ 
         if (NRJ > self.max_load * duree_pas_de_temps):
             cas = 1  # batterie chargee a bloc
-            NRJ_restante = self.battery_stock[39] - 8 * self.max_load * duree_pas_de_temps  # pour decharger la nuit
+            NRJ_restante = 8 *(NRJ - self.max_load * duree_pas_de_temps)  # pour decharger la nuit
         else:
             cas = 2  # batterie pas chargee a fond
 
