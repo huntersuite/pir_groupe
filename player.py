@@ -44,7 +44,7 @@ class Player:
         #        chargement_batterie = (self.capacity - self.battery_stock[time-1]) / duree_pas_de_temps
         
         #on charge + la batterie entre
-        elif time >=20 and time<30:
+        if time >=20 and time<30:
             chargement_batterie = (self.sun[time-1] / 2)+1 
             if (self.battery_stock[time-1] + chargement_batterie * duree_pas_de_temps) > self.capacity:
                 chargement_batterie = (self.capacity - self.battery_stock[time-1]) / duree_pas_de_temps
