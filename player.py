@@ -54,15 +54,17 @@ class Player:
         else : 
             cas = 2
         
-        if (cas ==2):
-            if (time >= 12) and (time <= 15) :
-                chargement_batterie = - NRJ /duree_pas_de_temps
-            else if ((time >= 40) and (time <= 43)) :
+       
+        else if (time >= 12) and (time <= 15) :
+            if (cas ==2):
                 chargement_batterie = - NRJ /duree_pas_de_temps
             else:
-                chargement_batterie = 0
-       
-            
+                
+                
+        else if ((time >= 40) and (time <= 43)) :
+            if (cas ==2):
+                chargement_batterie = - NRJ /duree_pas_de_temps
+            else:
         
         # heures où l'électricité est très chère de 12 à 15 et de 40 à 43 (inclus) 
         # cas 1 : la batterie est très remplie : on décharge la batterie de pmax aux heures chères et le reste de la batterie 
@@ -70,10 +72,10 @@ class Player:
         # cas 2 : la batterie est moins remplie : on décharge la batterie de self.battery_stock[40]/6 aux heures chères 
         
         # ancien code 
-        elif time > 0 and time < 18:
-            chargement_batterie = -self.battery_stock[time-1]/2*duree_pas_de_temps
-        elif time > 35 and time < 49:
-            chargement_batterie = - self.battery_stock[time-1]/2*duree_pas_de_temps
+        #elif time > 0 and time < 18:
+        #    chargement_batterie = -self.battery_stock[time-1]/2*duree_pas_de_temps
+        #elif time > 35 and time < 49:
+        #    chargement_batterie = - self.battery_stock[time-1]/2*duree_pas_de_temps
         
         # On vérifie qu'on ne dépasse pas la puissance max. 
         chargement_batterie = verif_pmax_batterie (self, chargement_batterie )
