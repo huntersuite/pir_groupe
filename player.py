@@ -17,10 +17,18 @@ class Player:
         self.imbalance=[]
 
     def take_decision(self, time):
-            duree_pas_de_temps = 0.5
-            # TO DO: 
-            # changer signes
-            duree_pas_de_temps = self.dt
+        def verif_pmax_batterie (self, chargement): 
+            """ 
+            Prend en argument une batterie et un chargement (ou un déchargement selon le signe)
+            Vérifie que la puissance de chargement ne dépasse pas la puissance maximale de la batterie
+            Renvoie le chargement possible 
+            """
+            if (abs(chargement) > self.max_load):
+                chargement = self.max_load*np.sign(chargement)
+            return chargement
+        
+        duree_pas_de_temps = 0.5
+        duree_pas_de_temps = self.dt
         
         
         # chargement de la batterie lorsque le soleil brille 
