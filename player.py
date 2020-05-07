@@ -51,10 +51,18 @@ class Player:
         # cas 1 : la batterie est très remplie : on décharge la batterie de pmax aux heures chères et le reste de la batterie 
         # pendant le reste de la nuit 
         
+        NRJ = self.battery_stock[39]/6 
+        if ( NRJ > self.max_load*dt ):
+            cas = 1 
+        else : 
+            cas = 2
+        
         
         
         
         # cas 2 : la batterie est moins remplie : on décharge la batterie de self.battery_stock[40]/6 aux heures chères 
+        
+        
         elif time > 0 and time < 18:
             chargement_batterie = -self.battery_stock[time-1]/2*duree_pas_de_temps
         elif time > 35 and time < 49:
