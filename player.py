@@ -22,8 +22,11 @@ class Player:
     def take_decision(self, time):
         duree_pas_de_temps = self.dt
         chargement_batterie = 0
+        
+        if (self.time == 40):
+            self.NRJ = self.battery_stock[39]/8 
        
-        NRJ = self.battery_stock[39]/8 
+        NRJ = self.NRJ 
         if ( NRJ > self.max_load* duree_pas_de_temps ): 
             cas = 1 #batterie chargee a bloc
             NRJ_restante = self.battery_stock[39] - 8 * self.max_load * duree_pas_de_temps #pour decharger la nuit
