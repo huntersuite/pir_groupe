@@ -31,36 +31,34 @@ class Player:
         chargement_batterie = 0
         
         NRJ = self.battery_stock[39]/8 
-        if ( NRJ > self.max_load* duree_pas_de_temps ):
-            cas = 1 
-            NRJ_restante = self.battery_stock[39] - 8 * self.max_load * duree_pas_de_temps
+        if ( NRJ > self.max_load* duree_pas_de_temps ): 
+            cas = 1 #batterie chargee a bloc
+            NRJ_restante = self.battery_stock[39] - 8 * self.max_load * duree_pas_de_temps #pour decharger la nuit
         else : 
-            cas = 2
+            cas = 2 #batterie pas chargee a fond
         
-        
-        
-        
+     
         if time >=20 and time<30: #chargement de la batterie au milieu de la journee
-            chargement_batterie = (self.sun[time-1] / 2)+1 
-            if (self.battery_stock[time-1] + chargement_batterie * duree_pas_de_temps) > self.capacity:
+            chargement_batterie = (self.sun[time-1] / 2)+1 #+1 au cas ou sun marche pas
+            if (self.battery_stock[time-1] + chargement_batterie * duree_pas_de_temps) > self.capacity: #verification de la capacite
                 chargement_batterie = (self.capacity - self.battery_stock[time-1]) / duree_pas_de_temps
         
         elif time == 0: #milieu de la nuit
             chargement_batterie = 0
 
-        elif (time >= 12) and (time <= 15) : #dechargement le matin
+        elif (time >= 12) and (time <= 15) : #dechargement le matin (heure de pointe)
             if (cas ==2):
                 chargement_batterie = - NRJ /duree_pas_de_temps
             else:
                 chargement_batterie = - self.max_load
                 
-        elif ((time >= 40) and (time <= 43)) : #dechargement le soir
+        elif ((time >= 40) and (time <= 43)) : #dechargement le soir (heure de pointe)
             if (cas ==2):
                 chargement_batterie = - NRJ /duree_pas_de_temps
             else:
                 chargement_batterie = - self.max_load
         
-        elif ((time < 12) or (43 < time )) :
+        elif ((time < 12) or (43 < time )) : #dechargement du reste de la batterie la nuit
             if (cas ==1):
                 chargement_batterie = - NRJ_restante / duree_pas_de_temps / (12 + 5) 
                 # 5 ? 
@@ -69,42 +67,6 @@ class Player:
         # On vérifie qu'on ne dépasse pas la puissance max. 
         chargement_batterie = verif_pmax_batterie (self, chargement_batterie )
         return chargement_batterie
-        
-        # heures où l'électricité est très chère de 12 à 15 et de 40 à 43 (inclus) 
-        # cas 1 : la batterie est très remplie : on décharge la batterie de pmax aux heures chères et le reste de la batterie 
-        # pendant le reste de la nuit 
-        # cas 2 : la batterie est moins remplie : on décharge la batterie de self.battery_stock[40]/6 aux heures chères 
-        
-        # ancien code 
-        #elif time > 0 and time < 18:
-        #    chargement_batterie = -self.battery_stock[time-1]/2*duree_pas_de_temps
-        #elif time > 35 and time < 49:
-        #    chargement_batterie = - self.battery_stock[time-1]/2*duree_pas_de_temps
-
-            #if time == 0:
-             #   return 0
-
-            #if time > 0 and time < 18:
-            #    return -self.battery_stock[time-1]/2*duree_pas_de_temps
-
-            #elif time > 17 and time < 36:
-             #   chargement_batterie = self.sun[time-1] / 2
-              #  if (self.battery_stock[time-1] + chargement_batterie * duree_pas_de_temps) < self.capacity:
-               #     if (chargement_batterie < self.max_load):
-                #        return chargement_batterie
-                 #   else :
-                  #      chargement_batterie = self.max_load
-                   #     return chargement_batterie
-                #else:
-                 #   chargement_batterie = (self.capacity - self.battery_stock[time-1]) / duree_pas_de_temps
-                  #  if (chargement_batterie < self.max_load):
-                   #     return chargement_batterie
-                    #else:
-                     #   chargement_batterie = self.max_load
-                      #  return chargement_batterie
-
-            #if time > 35 and time < 49:
-             #   return -self.battery_stock[time-1]/2*duree_pas_de_temps
 
     def update_battery_stock(self, time,load):
             if abs(load) > self.max_load:
