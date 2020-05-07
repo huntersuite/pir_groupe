@@ -30,6 +30,12 @@ class Player:
         duree_pas_de_temps = self.dt
         chargement_batterie = 0
         
+        NRJ = self.battery_stock[39]/8 
+        if ( NRJ > self.max_load* duree_pas_de_temps ):
+            cas = 1 
+        else : 
+            cas = 2
+        
         
         # chargement de la batterie lorsque le soleil brille 
         if time >= 18 and time < 36:
@@ -38,7 +44,7 @@ class Player:
                 chargement_batterie = (self.capacity - self.battery_stock[time-1]) / duree_pas_de_temps
         
         #on charge + la batterie entre
-        if time >=20 and time<30:
+        elif time >=20 and time<30:
             chargement_batterie = (self.sun[time-1] / 2)+1 
             if (self.battery_stock[time-1] + chargement_batterie * duree_pas_de_temps) > self.capacity:
                 chargement_batterie = (self.capacity - self.battery_stock[time-1]) / duree_pas_de_temps
@@ -46,27 +52,20 @@ class Player:
         # Déchargement de la batterie la nuit 
         elif time == 0:
             chargement_batterie = 0
-        
-        
-        NRJ = self.battery_stock[39]/8 
-        if ( NRJ > self.max_load* duree_pas_de_temps ):
-            cas = 1 
-        else : 
-            cas = 2
-        
-       
+
         elif (time >= 12) and (time <= 15) :
             if (cas ==2):
                 chargement_batterie = - NRJ /duree_pas_de_temps
             else:
-                chargement_batterie = self.max_load
+                chargement_batterie = - self.max_load
                 
                 
         elif ((time >= 40) and (time <= 43)) :
             if (cas ==2):
                 chargement_batterie = - NRJ /duree_pas_de_temps
             else:
-                chargement_batterie = self.max_load
+                chargement_batterie = - self.max_load
+        
         
         # heures où l'électricité est très chère de 12 à 15 et de 40 à 43 (inclus) 
         # cas 1 : la batterie est très remplie : on décharge la batterie de pmax aux heures chères et le reste de la batterie 
