@@ -55,13 +55,13 @@ class Player:
             cas = 2
         
        
-        else if (time >= 12) and (time <= 15) :
+        elif (time >= 12) and (time <= 15) :
             if (cas ==2):
                 chargement_batterie = - NRJ /duree_pas_de_temps
             else:
                 
                 
-        else if ((time >= 40) and (time <= 43)) :
+        elif ((time >= 40) and (time <= 43)) :
             if (cas ==2):
                 chargement_batterie = - NRJ /duree_pas_de_temps
             else:
