@@ -73,7 +73,10 @@ class Player:
         
         # Enregistrement du prix 
         if (time == 0):
-            self.memoire_prix_interne[47] = self.prices["sale"][47]
+            self.memoire_prix_interne[47] = 0 
+            # on aimerait bien self.prices["sale"][47] mais au premier jour de la simulation ça ne passe pas
+            # Solution possible : faire un compteur pour les jours 
+            # Mais flemme parce que de toute façon on ne se sert pas du prix à minuit 
         else:
             self.memoire_prix_interne[time-1] = self.prices["sale"][time-1]
         
