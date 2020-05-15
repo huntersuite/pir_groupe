@@ -27,6 +27,11 @@ class Player:
         duree_pas_de_temps = self.dt
         chargement_batterie = 0
         
+        moyenne_prix_journee = 0
+        for temps in range (12,37):
+            moyenne_prix_journee += self.memoire_prix_interne[temps]
+        moyenne_prix_journee = moyenne_prix_journee/24 
+        
         if (time == 40):
             self.memoire_NRJ = self.battery_stock[39] / 8
 
