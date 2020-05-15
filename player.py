@@ -43,7 +43,11 @@ class Player:
             cas = 2  # batterie pas chargee a fond
 
         if time >= 20 and time < 30:  # chargement de la batterie au milieu de la journee
-            chargement_batterie = (self.sun[time - 1] / 2) + 1  # +1 au cas ou sun marche pas
+            if (self.memoire_prix_interne[t]>moyenne_prix_journee):
+                chargement_batterie = (self.sun[time - 1] / 2) + 1  # +1 au cas ou sun marche pas
+            else : 
+                chargement_batterie = 0
+            
             if (self.battery_stock[
                     time - 1] + chargement_batterie * duree_pas_de_temps) > self.capacity:  # verification de la capacite
                 chargement_batterie = (self.capacity - self.battery_stock[time - 1]) / duree_pas_de_temps
