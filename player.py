@@ -16,11 +16,11 @@ class Player:
         self.prices = {"purchase" : [],"sale" : []}
         self.imbalance={"purchase_cover":[], "sale_cover": []}
         self.memoire_NRJ = 0
-        self.prix_interne = np.zeros(48)
+        self.memoire_prix_interne = np.zeros(48)
 
     def take_decision(self, time):
         #ON A AJOUTE self.memoire_NRJ = 0 
-        # et self.prix_interne = np.zeros(48)
+        # et self.memoire_prix_interne = np.zeros(48)
         #DANS _INIT_. 
         #FAITES ATTENTION SI VOUS COPIEZ DES PARTIES DU CODE, MERCI !
         
@@ -61,7 +61,8 @@ class Player:
                 # 5 correspond au nombre de pas de temps entre 22H et minuit ???
             else:
                 chargement_batterie = 0
-
+        
+        self.memoire_prix_interne[t] = 
         # On vérifie qu'on ne dépasse pas la puissance max.
         if (abs(chargement_batterie) > self.max_load):
             chargement_batterie = self.max_load * np.sign(chargement_batterie)
