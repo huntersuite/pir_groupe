@@ -69,9 +69,9 @@ class Player:
         
         # Enregistrement du prix 
         if (time == 0):
-            self.memoire_prix_interne[47] = self.prices.sale[47]
+            self.memoire_prix_interne[47] = self.prices['sale'][47]
         else:
-            self.memoire_prix_interne[t-1] = self.prices.sale[t-1]
+            self.memoire_prix_interne[t-1] = self.prices['sale'][t-1]
         
         # On vérifie qu'on ne dépasse pas la puissance max.
         if (abs(chargement_batterie) > self.max_load):
