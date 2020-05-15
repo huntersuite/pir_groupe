@@ -16,9 +16,12 @@ class Player:
         self.prices = {"purchase" : [],"sale" : []}
         self.imbalance={"purchase_cover":[], "sale_cover": []}
         self.memoire_NRJ = 0
+        self.prix_interne = np.zeros(48)
 
     def take_decision(self, time):
-        #ON A AJOUTE self.memoire_NRJ = 0 DANS _INIT_.
+        #ON A AJOUTE self.memoire_NRJ = 0 
+        # et self.prix_interne = np.zeros(48)
+        #DANS _INIT_. 
         #FAITES ATTENTION SI VOUS COPIEZ DES PARTIES DU CODE, MERCI !
         
         duree_pas_de_temps = self.dt
