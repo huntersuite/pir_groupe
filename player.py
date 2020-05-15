@@ -43,7 +43,7 @@ class Player:
             cas = 2  # batterie pas chargee a fond
 
         if time >= 20 and time < 36:  # chargement de la batterie au milieu de la journee
-            if (self.memoire_prix_interne[t] < moyenne_prix_journee):
+            if (self.memoire_prix_interne[time] < moyenne_prix_journee):
                 chargement_batterie = (self.sun[time - 1] / 2) + 1  # +1 au cas ou sun marche pas
             else : 
                 chargement_batterie = 0
@@ -75,7 +75,7 @@ class Player:
         if (time == 0):
             self.memoire_prix_interne[47] = self.prices['sale'][47]
         else:
-            self.memoire_prix_interne[t-1] = self.prices['sale'][t-1]
+            self.memoire_prix_interne[time-1] = self.prices['sale'][time-1]
         
         # On vérifie qu'on ne dépasse pas la puissance max.
         if (abs(chargement_batterie) > self.max_load):
