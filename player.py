@@ -49,7 +49,7 @@ class Player:
 
         if time >= 20 and time < 36:  # chargement de la batterie au milieu de la journee
             if (self.memoire_prix_interne[time] < 0.9*moyenne_prix_journee):
-                chargement_batterie = (self.sun[time - 1]*4 / 5)  # +1 au cas ou sun marche pas
+                chargement_batterie = (self.sun[time - 1]* 2 / 5)  # +1 au cas ou sun marche pas
             else : 
                 chargement_batterie = 0
             
