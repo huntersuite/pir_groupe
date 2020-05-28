@@ -31,9 +31,9 @@ class Player:
         chargement_batterie = 0
         
         moyenne_prix_journee = 0
-        for temps in range (12,37):
+        for temps in range (14,37):
             moyenne_prix_journee += self.memoire_prix_interne[temps]
-        moyenne_prix_journee = moyenne_prix_journee/24 
+        moyenne_prix_journee = moyenne_prix_journee/22 
         
         nombre_de_pas_ou_le_dechargement_est_prioritaire = 9
         if (time == 40):
