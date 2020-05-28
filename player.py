@@ -96,7 +96,7 @@ class Player:
             chargement_batterie = self.max_load * np.sign(chargement_batterie)
         return chargement_batterie
 
-     def update_battery_stock(self, time,load):
+    def update_battery_stock(self, time,load):
         if abs(load) > self.max_load:
             load = self.max_load*np.sign(load) #saturation au maximum de la batterie
             new_stock = self.battery_stock[time] + (self.efficiency*max(0,load) - 1/self.efficiency * max(0,-load))*self.dt
