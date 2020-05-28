@@ -5,7 +5,6 @@ from numpy.random import randint
 class Player:
 
     def __init__(self):
-        def __init__(self):
         self.dt = 0.5
         self.efficiency=0.95
         self.sun=[]
@@ -18,6 +17,7 @@ class Player:
         self.max_load = 70
         self.prices = {"purchase" : [],"sale" : []}
         self.imbalance={"purchase_cover":[], "sale_cover": []}
+        # ATTENTION ON A RAJOUTE DEUX VARIABLES A SELF 
         self.memoire_NRJ = 0
         self.memoire_prix_interne = np.zeros(48)
 
