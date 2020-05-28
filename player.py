@@ -46,14 +46,14 @@ class Player:
             cas = 2  # batterie pas chargee a fond
 
         if time >= 20 and time < 36:  # chargement de la batterie au milieu de la journee
-            if (self.memoire_prix_interne[time] < moyenne_prix_journee):
+            if (self.memoire_prix_interne[time] < 0.9*moyenne_prix_journee):
                 chargement_batterie = (self.sun[time - 1] / 3)  # +1 au cas ou sun marche pas
             else : 
                 chargement_batterie = 0
             
             if (self.battery_stock[
                     time - 1] + chargement_batterie * duree_pas_de_temps) > self.capacity:  # verification de la capacite
-                chargement_batterie = (self.capacity - self.battery_stock[time - 1]) / duree_pas_de_temps
+                chargement_batterie = np.maximum((self.capacity - self.battery_stock[time - 1]) / duree_pas_de_temps, 0) 
 
         elif (time >= 12) and (time <= 15):  # dechargement le matin (heure de pointe)
             if (cas == 2):
