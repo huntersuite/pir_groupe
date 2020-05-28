@@ -35,13 +35,15 @@ class Player:
             moyenne_prix_journee += self.memoire_prix_interne[temps]
         moyenne_prix_journee = moyenne_prix_journee/24 
         
+        nombre_de_pas_ou_le_dechargement_est_prioritaire = 9
         if (time == 40):
-            self.memoire_NRJ = self.battery_stock[39] / 8
+            self.memoire_NRJ = self.battery_stock[39] / nombre_de_pas_ou_le_dechargement_est_prioritaire 
 
         NRJ = self.memoire_NRJ 
         if (NRJ > self.max_load * duree_pas_de_temps):
             cas = 1  # batterie chargee a bloc
-            NRJ_restante = 8 *(NRJ - self.max_load * duree_pas_de_temps)  # pour decharger la nuit
+            NRJ_restante = nombre_de_pas_ou_le_dechargement_est_prioritaire *(NRJ - self.max_load * duree_pas_de_temps) 
+            # pour decharger la nuit
         else:
             cas = 2  # batterie pas chargee a fond
 
