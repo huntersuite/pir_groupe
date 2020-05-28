@@ -76,6 +76,9 @@ class Player:
             else:
                 chargement_batterie = 0
         
+        elif(time ==0):
+            chargement_batterie = - NRJ / duree_pas_de_temps
+            
         # Enregistrement du prix 
         if (time == 0):
             self.memoire_prix_interne[47] = 0 
