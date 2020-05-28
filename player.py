@@ -5,11 +5,14 @@ from numpy.random import randint
 class Player:
 
     def __init__(self):
+        def __init__(self):
         self.dt = 0.5
         self.efficiency=0.95
         self.sun=[]
         self.bill = np.zeros(48) # prix de vente de l'électricité
         self.load= np.zeros(48) # chargement de la batterie (li)
+        self.penalty=np.zeros(48)
+        self.grid_relative_load=np.zeros(48)
         self.battery_stock = np.zeros(49) #a(t)
         self.capacity = 100
         self.max_load = 70
