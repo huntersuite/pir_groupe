@@ -75,7 +75,10 @@ class Player:
                 # 5 correspond au nombre de pas de temps entre 22H et minuit ???
             else:
                 chargement_batterie = 0
-        
+                
+        # On cherche à voir si c'est interessant de décharger la nuit 
+        # Il faudrait tester si 
+        # Memoire_bonus + memoire_prix * chargement_batterie  > ( memoire_prix * chargement_batterie )sur 8 pas de temps  
         elif(time ==0):
             chargement_batterie = - NRJ / duree_pas_de_temps
             
