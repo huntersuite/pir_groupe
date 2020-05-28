@@ -35,7 +35,7 @@ class Player:
             moyenne_prix_journee += self.memoire_prix_interne[temps]
         moyenne_prix_journee = moyenne_prix_journee/22 
         
-        nombre_de_pas_ou_le_dechargement_est_prioritaire = 9
+        nombre_de_pas_ou_le_dechargement_est_prioritaire = 10
         if (time == 40):
             self.memoire_NRJ = self.battery_stock[39] / nombre_de_pas_ou_le_dechargement_est_prioritaire 
 
@@ -80,7 +80,7 @@ class Player:
         # Il faudrait tester si 
         # Memoire_bonus + memoire_prix * chargement_batterie  > ( memoire_prix * chargement_batterie )sur 8 pas de temps  
         elif(time ==0):
-            chargement_batterie = - NRJ / duree_pas_de_temps
+            chargement_batterie = - 2 * NRJ / duree_pas_de_temps
             
         # Enregistrement du prix 
         if (time == 0):
