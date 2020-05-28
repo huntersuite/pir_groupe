@@ -67,7 +67,7 @@ class Player:
             else:
                 chargement_batterie = - self.max_load
 
-        elif ((time < 12) or (43 < time)):  # dechargement du reste de la batterie la nuit
+        elif ((time < 12) or (43 < time) and (time > 0):  # dechargement du reste de la batterie la nuit
             if (cas == 1):
                 chargement_batterie = - NRJ_restante / duree_pas_de_temps / (12 + 5)
                 # 5 correspond au nombre de pas de temps entre 22H et minuit ???
